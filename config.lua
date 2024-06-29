@@ -1,4 +1,4 @@
-Config = {}
+Config = Config or {}
 
 Config.Debug = false
 
@@ -98,4 +98,11 @@ Config.ExperienceSystem = {
         [4] = {exp = 5000, bonus = 1.3},
         [5] = {exp = 10000, bonus = 1.5},
     }
+}
+
+-- discord
+-- Discord Webhook
+Config.DiscordWebhook = {
+    enabled = true,
+    url = "YOUR_DISCORD_WEBHOOK_URL_HERE",
 }
