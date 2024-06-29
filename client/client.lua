@@ -4,6 +4,26 @@ local isRecycling = false
 local currentRoute = nil
 local currentWaypoint = 1
 local recyclingTruck = nil
+local resourceName = GetCurrentResourceName()
+
+function SendDiscordMessage(title, message, color)
+    if not Config.DiscordWebhook.enabled then return end
+    
+    local embed = {
+        {
+            ["title"] = title,
+            ["description"] = message,
+            ["type"] = "rich",
+            ["color"] = color or 7584788,
+            ["footer"] = {
+                ["text"] = "TheLuxEmpire Recycling System",
+            },
+            ["timestamp"] = os.date("!%Y-%m-%dT%H:%M:%SZ")
+        }
+    }
+    PerformHttpRequest(Config.DiscordWebhook.url, function(err, text, headers) end, 'POST', json.encode({username = "Recycling System", embeds = embed}), { ['Content-Type'] = 'application/json' })
+end
+
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
